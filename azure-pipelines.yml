@@ -1,23 +1,25 @@
-# Gradle
-# Build your Java project and run tests with Gradle using a Gradle wrapper script.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+# Nombre del Pipeline
+name: Java Pipeline
 
+# Gatillo del Pipeline (cuándo se ejecutará el pipeline)
 trigger:
 - main
 
+# Configuración del Agente (el tipo de máquina virtual que se utilizará)
 pool:
   vmImage: ubuntu-latest
 
+# Pasos del Pipeline
 steps:
 - task: Gradle@2
+  displayName: 'Build Java project and run tests with Gradle'
   inputs:
-    workingDirectory: ''
-    gradleWrapperFile: 'gradlew'
-    gradleOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
-    tasks: 'build'
+    workingDirectory: '' # Directorio de trabajo del proyecto
+    gradleWrapperFile: 'gradlew' # Nombre del archivo wrapper de Gradle
+    gradleOptions: '-Xmx3072m' # Opciones de Gradle
+    javaHomeOption: 'JDKVersion' # Opción del JDK
+    jdkVersionOption: '1.8' # Versión de JDK
+    jdkArchitectureOption: 'x64' # Arquitectura de JDK
+    publishJUnitResults: true # Publicar resultados de JUnit
+    testResultsFiles: '**/TEST-*.xml' # Patrón de archivos de resultados de pruebas
+    tasks: 'build' # Tareas a ejecutar (en este caso, solo construir el proyecto)
